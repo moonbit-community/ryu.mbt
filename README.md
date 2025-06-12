@@ -16,7 +16,7 @@ test "ryu_to_string_precision" {
 ///|
 test "ryu_to_string_exp" {
   inspect(
-    ryu_to_string_exp(12345.123, precision=3),
+    ryu_to_string_exp(12345.123, precision=17),
     content="1.23451229999999996e+04",
   )
 }

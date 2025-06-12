@@ -603,6 +603,14 @@ pub fn ryu_to_string_exp(
 test "ryu_to_string_exp" {
   inspect(
     ryu_to_string_exp(12345.123, precision=3),
+    content="1.235e+04",
+  )
+}
+
+///|
+test "ryu_to_string_exp" {
+  inspect(
+    ryu_to_string_exp(12345.123, precision=17),
     content="1.23451229999999996e+04",
   )
 }
