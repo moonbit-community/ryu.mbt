@@ -510,11 +510,7 @@ fn d2d(ieeeMantissa : UInt64, ieeeExponent : UInt) -> FloatingDecimal64 {
 }
 
 ///|
-fn to_chars(
-  v : FloatingDecimal64,
-  sign : Bool,
-  upper~ : Bool = false,
-) -> String {
+fn to_chars(v : FloatingDecimal64, sign : Bool, upper : Bool) -> String {
   // Step 5: Print the decimal representation.
   let result = FixedArray::make(25, Byte::default())
   let mut index : Int = 0
@@ -679,7 +675,7 @@ pub fn ryu_to_string(val : Double, upper~ : Bool = false) -> String {
     }
     None => v = d2d(ieeeMantissa, ieeeExponent.reinterpret_as_uint())
   }
-  to_chars(v, ieeeSign, upper~)
+  to_chars(v, ieeeSign, upper)
 }
 
 ///|
