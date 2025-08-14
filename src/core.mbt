@@ -16,6 +16,7 @@
 // This is a fork of the ryu crate adjusted to comply to the ECMAScript number-to-string algorithm,
 
 // This File fork from https://github.com/oonbitlang/core/tree/main/double/internal/ryu
+
 ///|
 fn pow5bits(e : Int) -> Int {
   ((e * 1217359).reinterpret_as_uint() >> 19).reinterpret_as_int() + 1
@@ -116,7 +117,7 @@ fn mulShiftAll64(
   m : UInt64,
   mul : (UInt64, UInt64),
   j : Int,
-  mmShift : Bool
+  mmShift : Bool,
 ) -> (UInt64, UInt64, UInt64) {
   let m = m << 1
   let (lo, tmp) = umul128(m, mul.0)
@@ -512,7 +513,7 @@ fn d2d(ieeeMantissa : UInt64, ieeeExponent : UInt) -> FloatingDecimal64 {
 fn to_chars(
   v : FloatingDecimal64,
   sign : Bool,
-  upper~ : Bool = false
+  upper~ : Bool = false,
 ) -> String {
   // Step 5: Print the decimal representation.
   let result = FixedArray::make(25, Byte::default())
@@ -622,7 +623,7 @@ fn to_chars(
 ///|
 fn d2d_small_int(
   ieeeMantissa : UInt64,
-  ieeeExponent : Int
+  ieeeExponent : Int,
 ) -> FloatingDecimal64? {
   let m2 : UInt64 = (1UL << gDOUBLE_MANTISSA_BITS) | ieeeMantissa
   let e2 : Int = ieeeExponent - gDOUBLE_BIAS - gDOUBLE_MANTISSA_BITS

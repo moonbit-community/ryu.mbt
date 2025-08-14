@@ -64,6 +64,7 @@ fn mulShift_mod1e9(m : UInt64, mul : Array[UInt64], j : Int) -> Int {
 }
 
 // Returns the number of decimal digits in v, which must not contain more than 9 digits.
+
 ///|
 fn decimalLength9(v : Int) -> Int {
   // Function precondition: v is not a 10-digit number.
@@ -125,7 +126,8 @@ test "db2string4" {
   )
 }
 
-// TODO: roundUp 
+// TODO: roundUp
+
 ///|
 test "db2string5" {
   inspect(
@@ -139,7 +141,7 @@ fn write_digits(
   array : FixedArray[Byte],
   start : Int,
   len : Int,
-  digits : Int
+  digits : Int,
 ) -> Unit {
   let mut idx = start + len - 1
   let mut digits = digits
@@ -161,7 +163,7 @@ test "write_digits" {
 fn write_nine_digits(
   array : FixedArray[Byte],
   start : Int,
-  digits : Int
+  digits : Int,
 ) -> Unit {
   write_digits(array, start, 9, digits)
 }
@@ -171,7 +173,7 @@ fn write_chars(
   array : FixedArray[Byte],
   start : Int,
   len : Int,
-  char : Byte
+  char : Byte,
 ) -> Unit {
   let mut idx = start
   for _ in 0..<len {
@@ -185,7 +187,7 @@ fn write_decimal_digits(
   array : FixedArray[Byte],
   start : Int,
   len : Int,
-  digits : Int
+  digits : Int,
 ) -> Unit {
   let mut idx = start + len
   let mut digits = digits
@@ -387,7 +389,7 @@ pub fn ryu_to_string_precision(val : Double, precision~ : Int = 17) -> String {
 pub fn ryu_to_string_exp(
   val : Double,
   precision~ : Int = 17,
-  upper~ : Bool = false
+  upper~ : Bool = false,
 ) -> String {
   let mut precision = precision
   let result = FixedArray::make(25, Byte::default())
@@ -601,10 +603,7 @@ pub fn ryu_to_string_exp(
 
 ///|
 test "ryu_to_string_exp" {
-  inspect(
-    ryu_to_string_exp(12345.123, precision=3),
-    content="1.235e+04",
-  )
+  inspect(ryu_to_string_exp(12345.123, precision=3), content="1.235e+04")
 }
 
 ///|
