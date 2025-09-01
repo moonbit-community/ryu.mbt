@@ -15,7 +15,7 @@
 // MoonBit implementation of Ryu, https://github.com/ulfjack/ryu
 // This is a fork of the ryu crate adjusted to comply to the ECMAScript number-to-string algorithm,
 
-// This File fork from https://github.com/oonbitlang/core/tree/main/double/internal/ryu
+// This File fork from https://github.com/moonbitlang/core/tree/main/double/internal/ryu
 
 ///|
 fn pow5bits(e : Int) -> Int {
@@ -639,7 +639,7 @@ fn d2d_small_int(
 
 ///|
 /// TODO: ryu_to_logger[T:Logger](Double/Float, T) -> Unit
-pub fn ryu_to_string(val : Double, upper~ : Bool = false) -> String {
+pub fn ryu_to_string(val : Double, upper? : Bool = false) -> String {
   if val == 0.0 {
     return "0"
   }

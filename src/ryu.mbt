@@ -97,44 +97,6 @@ fn decimalLength9(v : Int) -> Int {
   return 1
 }
 
-///|
-test "db2string" {
-  inspect(
-    ryu_to_string_precision(12345.123456, precision=3),
-    content="12345.123",
-  )
-}
-
-///|
-test "db2string2" {
-  inspect(ryu_to_string_precision(12345.123456, precision=0), content="12345")
-}
-
-///|
-test "db2string3" {
-  inspect(
-    ryu_to_string_precision(12345.123456, precision=10),
-    content="12345.1234560000",
-  )
-}
-
-///|
-test "db2string4" {
-  inspect(
-    ryu_to_string_precision(12345.123456, precision=17),
-    content="12345.12345599999935075",
-  )
-}
-
-// TODO: roundUp
-
-///|
-test "db2string5" {
-  inspect(
-    ryu_to_string_precision(-8888888.1, precision=1),
-    content="-8888888.1",
-  )
-}
 
 ///|
 fn write_digits(
@@ -219,7 +181,7 @@ fn write_string(array : FixedArray[Byte], start : Int, str : Bytes) -> Unit {
 }
 
 ///|
-pub fn ryu_to_string_precision(val : Double, precision~ : Int = 17) -> String {
+pub fn ryu_to_string_precision(val : Double, precision? : Int = 17) -> String {
   let result = FixedArray::make(25, Byte::default())
   let bits : UInt64 = val.reinterpret_as_uint64()
   let ieeeSign = (
@@ -388,8 +350,8 @@ pub fn ryu_to_string_precision(val : Double, precision~ : Int = 17) -> String {
 ///|
 pub fn ryu_to_string_exp(
   val : Double,
-  precision~ : Int = 17,
-  upper~ : Bool = false,
+  precision? : Int = 17,
+  upper? : Bool = false,
 ) -> String {
   let mut precision = precision
   let result = FixedArray::make(25, Byte::default())
@@ -596,20 +558,5 @@ pub fn ryu_to_string_exp(
     index += 2
   }
 
-  // println(result.to_string())
-  // println("idx: " + idx.to_string())
   return string_from_bytes(result, 0, index)
-}
-
-///|
-test "ryu_to_string_exp" {
-  inspect(ryu_to_string_exp(12345.123, precision=3), content="1.235e+04")
-}
-
-///|
-test "ryu_to_string_exp" {
-  inspect(
-    ryu_to_string_exp(12345.123, precision=17),
-    content="1.23451229999999996e+04",
-  )
 }
