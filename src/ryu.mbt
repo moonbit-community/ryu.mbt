@@ -107,7 +107,7 @@ fn write_digits(
 ) -> Unit {
   let mut idx = start + len - 1
   let mut digits = digits
-  for i in 0..<len {
+  for _ in 0..<len {
     array[idx] = (48 + digits % 10).to_byte()
     digits /= 10
     idx -= 1
@@ -153,7 +153,7 @@ fn write_decimal_digits(
 ) -> Unit {
   let mut idx = start + len
   let mut digits = digits
-  for i in 0..<(len - 1) {
+  for _ in 0..<(len - 1) {
     array[idx] = (48 + digits % 10).to_byte()
     digits /= 10
     idx -= 1
@@ -286,7 +286,7 @@ pub fn ryu_to_string_precision(val : Double, precision? : Int = 17) -> String {
       } else {
         let maximum = precision - 9 * i
         let mut lastDigit = 0
-        for k in 0..<(9 - maximum) {
+        for _ in 0..<(9 - maximum) {
           lastDigit = digits % 10
           digits /= 10
         }
@@ -483,7 +483,7 @@ pub fn ryu_to_string_exp(
   }
   let mut lastDigit = 0
   if avaiableDigits > maximum {
-    for k in 0..<(avaiableDigits - maximum) {
+    for _ in 0..<(avaiableDigits - maximum) {
       lastDigit = digits % 10
       digits /= 10
     }
