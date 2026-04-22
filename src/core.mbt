@@ -466,8 +466,7 @@ fn d2d(ieeeMantissa : UInt64, ieeeExponent : UInt) -> FloatingDecimal64 {
       lastRemovedDigit = 4
     }
     output = vr +
-      ((vr == vm && (!even || !vmIsTrailingZeros)) ||
-      lastRemovedDigit >= 5)
+      ((vr == vm && (!even || !vmIsTrailingZeros)) || lastRemovedDigit >= 5)
       .to_int64()
       .reinterpret_as_uint64()
   } else {
