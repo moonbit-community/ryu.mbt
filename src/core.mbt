@@ -679,7 +679,7 @@ pub fn ryu_to_string(val : Double, upper? : Bool = false) -> String {
 }
 
 ///|
-test "double/ryu.mbt:252" {
+test "double/ryu.mbt:252 repeat" {
   assert_eq(gDOUBLE_POW5_BITCOUNT, 125)
 }
 
