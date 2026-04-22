@@ -2,11 +2,11 @@
 package "BigOrangeQWQ/ryu"
 
 // Values
-fn ryu_to_string(Double, upper? : Bool) -> String
+pub fn ryu_to_string(Double, upper? : Bool) -> String
 
-fn ryu_to_string_exp(Double, precision? : Int, upper? : Bool) -> String
+pub fn ryu_to_string_exp(Double, precision? : Int, upper? : Bool) -> String
 
-fn ryu_to_string_precision(Double, precision? : Int) -> String
+pub fn ryu_to_string_precision(Double, precision? : Int) -> String
 
 // Errors
 
