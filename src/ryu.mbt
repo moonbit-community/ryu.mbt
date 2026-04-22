@@ -97,7 +97,6 @@ fn decimalLength9(v : Int) -> Int {
   return 1
 }
 
-
 ///|
 fn write_digits(
   array : FixedArray[Byte],
