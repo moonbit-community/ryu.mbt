@@ -38,7 +38,7 @@ test "db2string5" {
 }
 
 ///|
-test "ryu_to_string_exp" {
+test "ryu_to_string_exp_precision_17" {
   inspect(ryu_to_string_exp(12345.123, precision=3), content="1.235e+04")
 }
 
