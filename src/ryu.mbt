@@ -247,7 +247,7 @@ pub fn ryu_to_string_precision(val : Double, precision? : Int = 17) -> String {
       }
     }
   }
-  if not(nonzero) {
+  if !nonzero {
     result[index] = b'0'
     index += 1
   }
@@ -312,7 +312,7 @@ pub fn ryu_to_string_precision(val : Double, precision? : Int = 17) -> String {
       let mut dotIndex = 0
       while true {
         roundIndex -= 1
-        if roundIndex == -1 || result[roundIndex] == '-' {
+        if roundIndex == -1 || result[roundIndex] == b'-' {
           result[roundIndex + 1] = b'1'
           if dotIndex > 0 {
             result[dotIndex] = b'0'
