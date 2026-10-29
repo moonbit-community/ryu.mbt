@@ -4,9 +4,9 @@ package "BigOrangeQWQ/ryu"
 // Values
 pub fn ryu_to_string(Double, upper? : Bool) -> String
 
-pub fn ryu_to_string_exp(Double, precision? : Int, upper? : Bool) -> String
+pub fn ryu_to_string_exp(Double, precision? : Int32, upper? : Bool) -> String
 
-pub fn ryu_to_string_precision(Double, precision? : Int) -> String
+pub fn ryu_to_string_precision(Double, precision? : Int32) -> String
 
 // Errors
 
@@ -15,4 +15,3 @@ pub fn ryu_to_string_precision(Double, precision? : Int) -> String
 // Type aliases
 
 // Traits
-

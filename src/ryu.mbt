@@ -7,17 +7,17 @@ let gPOW10_ADDITIONAL_BITS = 120
 let gADDITIONAL_BITS_2 = 120
 
 ///|
-fn pow10BitsForIndex(idx : Int) -> Int {
+fn pow10BitsForIndex(idx : Int32) -> Int32 {
   return 16 * idx + gPOW10_ADDITIONAL_BITS
 }
 
 ///|
-fn indexForExponent(e : Int) -> Int {
+fn indexForExponent(e : Int32) -> Int32 {
   return (e + 15) / 16
 }
 
 ///|
-fn lengthForIndex(idx : Int) -> Int {
+fn lengthForIndex(idx : Int32) -> Int32 {
   // +1 for ceil, +16 for mantissa, +8 to round up when dividing by 9
   return (log10Pow2(16 * idx) + 1 + 16 + 8) / 9
 }
@@ -37,12 +37,12 @@ fn div1e9(x : UInt64) -> UInt64 {
 }
 
 ///|
-fn mod1e9(x : UInt64) -> Int {
+fn mod1e9(x : UInt64) -> Int32 {
   (x - 1000000000 * div1e9(x)).to_int()
 }
 
 ///|
-fn mulShift_mod1e9(m : UInt64, mul : Array[UInt64], j : Int) -> Int {
+fn mulShift_mod1e9(m : UInt64, mul : Array[UInt64], j : Int32) -> Int32 {
   let (_, high0) = umul128(m, mul[0])
   let (low1, high1) = umul128(m, mul[1])
   let (low2, high2) = umul128(m, mul[2])
@@ -66,7 +66,7 @@ fn mulShift_mod1e9(m : UInt64, mul : Array[UInt64], j : Int) -> Int {
 // Returns the number of decimal digits in v, which must not contain more than 9 digits.
 
 ///|
-fn decimalLength9(v : Int) -> Int {
+fn decimalLength9(v : Int32) -> Int32 {
   // Function precondition: v is not a 10-digit number.
   // (f2s: 9 digits are sufficient for round-tripping.)
   // (d2fixed: We print 9-digit blocks.)
@@ -100,9 +100,9 @@ fn decimalLength9(v : Int) -> Int {
 ///|
 fn write_digits(
   array : FixedArray[Byte],
-  start : Int,
-  len : Int,
-  digits : Int,
+  start : Int32,
+  len : Int32,
+  digits : Int32,
 ) -> Unit {
   let mut idx = start + len - 1
   let mut digits = digits
@@ -123,8 +123,8 @@ test "write_digits" {
 ///|
 fn write_nine_digits(
   array : FixedArray[Byte],
-  start : Int,
-  digits : Int,
+  start : Int32,
+  digits : Int32,
 ) -> Unit {
   write_digits(array, start, 9, digits)
 }
@@ -132,8 +132,8 @@ fn write_nine_digits(
 ///|
 fn write_chars(
   array : FixedArray[Byte],
-  start : Int,
-  len : Int,
+  start : Int32,
+  len : Int32,
   char : Byte,
 ) -> Unit {
   let mut idx = start
@@ -146,9 +146,9 @@ fn write_chars(
 ///|
 fn write_decimal_digits(
   array : FixedArray[Byte],
-  start : Int,
-  len : Int,
-  digits : Int,
+  start : Int32,
+  len : Int32,
+  digits : Int32,
 ) -> Unit {
   let mut idx = start + len
   let mut digits = digits
@@ -171,7 +171,7 @@ test "write_decimal_digits" {
 }
 
 ///|
-fn write_string(array : FixedArray[Byte], start : Int, str : Bytes) -> Unit {
+fn write_string(array : FixedArray[Byte], start : Int32, str : Bytes) -> Unit {
   let mut idx = start
   for byte in str {
     array[idx] = byte
@@ -180,7 +180,7 @@ fn write_string(array : FixedArray[Byte], start : Int, str : Bytes) -> Unit {
 }
 
 ///|
-pub fn ryu_to_string_precision(val : Double, precision? : Int = 17) -> String {
+pub fn ryu_to_string_precision(val : Double, precision~ : Int32 = 17) -> String {
   let result = FixedArray::make(25, Byte::default())
   let bits : UInt64 = val.reinterpret_as_uint64()
   let ieeeSign = (
@@ -188,7 +188,7 @@ pub fn ryu_to_string_precision(val : Double, precision? : Int = 17) -> String {
     ) !=
     0UL
   let ieeeMantissa : UInt64 = bits & ((1UL << gDOUBLE_MANTISSA_BITS) - 1UL)
-  let ieeeExponent : Int = ((bits >> gDOUBLE_MANTISSA_BITS) &
+  let ieeeExponent : Int32 = ((bits >> gDOUBLE_MANTISSA_BITS) &
   ((1UL << gDOUBLE_EXPONENT_BITS) - 1UL)).to_int()
   if ieeeExponent == (1 << gDOUBLE_EXPONENT_BITS) - 1 ||
     (ieeeExponent == 0 && ieeeMantissa == 0UL) {
@@ -349,8 +349,8 @@ pub fn ryu_to_string_precision(val : Double, precision? : Int = 17) -> String {
 ///|
 pub fn ryu_to_string_exp(
   val : Double,
-  precision? : Int = 17,
-  upper? : Bool = false,
+  precision~ : Int32 = 17,
+  upper~ : Bool = false,
 ) -> String {
   let mut precision = precision
   let result = FixedArray::make(25, Byte::default())
@@ -360,7 +360,7 @@ pub fn ryu_to_string_exp(
     ) !=
     0UL
   let ieeeMantissa : UInt64 = bits & ((1UL << gDOUBLE_MANTISSA_BITS) - 1UL)
-  let ieeeExponent : Int = ((bits >> gDOUBLE_MANTISSA_BITS) &
+  let ieeeExponent : Int32 = ((bits >> gDOUBLE_MANTISSA_BITS) &
   ((1UL << gDOUBLE_EXPONENT_BITS) - 1UL)).to_int()
   if ieeeExponent == (1 << gDOUBLE_EXPONENT_BITS) - 1 ||
     (ieeeExponent == 0 && ieeeMantissa == 0UL) {
